@@ -1,5 +1,5 @@
 ```diff
-@@ Just a random engine I'm making for fun and learning. @@
+@@ Just a random engine I'm making for my own projects. @@
 ```
 ## Running it
 
