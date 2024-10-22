@@ -1,48 +1,58 @@
-#include <SFML/Graphics.hpp>
+#include "libraries.h"
+#include "Graphics.h"
 
-int main(int argc, char** argv)
+using std::string;
+
+//if you want your window to move size you can delete
+#define WINDOWWIDTH 400
+#define WINDOWHEIGHT 400
+
+int main(void)
 {
-    //Création d'une fenêtre
-    sf::RenderWindow oWindow(sf::VideoMode(640, 480), "SFML");
-
-    //Création d'un cercle de radius 100
-    sf::CircleShape oCircle(100.f);
-    //A la position 0, 0
-    oCircle.setPosition(0.f, 0.f);
-    //Et de couleur verte
-    oCircle.setFillColor(sf::Color::Green);
 
 
-    //Création d'un rectangle de taille 50, 50
-    sf::RectangleShape oRectangle(sf::Vector2f(50.f, 50.f));
-    //A la position 100, 100
-    oCircle.setPosition(100.f, 100.f);
-    //Et de couleur rouge
-    oRectangle.setFillColor(sf::Color::Red);
+    sf::RenderWindow window(sf::VideoMode(WINDOWWIDTH, WINDOWHEIGHT), "Game");
 
-    //GameLoop
-    while (oWindow.isOpen())
+    
+
+    while (window.isOpen())
     {
-        //EVENT
-        sf::Event oEvent;
-        while (oWindow.pollEvent(oEvent))
+        sf::Event event;
+
+        // Game Loop
+
+        
+
+        // /Game Loop End/
+
+        while (window.pollEvent(event))
         {
-            if (oEvent.type == sf::Event::Closed)
-                oWindow.close();
+
+            // Event Loop
+            if (event.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+
+            if (event.type == sf::Event::MouseButtonPressed &&
+                event.mouseButton.button == sf::Mouse::Left)
+            {
+            }
+            if (event.type == sf::Event::KeyPressed &&
+                event.key.code == sf::Keyboard::R)
+            {
+            }
+
+            if (event.type == sf::Event::KeyPressed &&
+                event.key.code == sf::Keyboard::Escape)
+            {
+                window.close();
+            }
+            // /Event Loop End/
         }
 
-        //UPDATE
 
-        //DRAW
-        oWindow.clear();
-
-        oWindow.draw(oCircle);
-        oWindow.draw(oRectangle);
-
-        oWindow.display();
+        window.display();
     }
-
     return 0;
 }
-
-
