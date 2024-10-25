@@ -1,9 +1,6 @@
-```diff
-@@ Just a random engine I'm making for my own projects. @@
-```
 ## Running it
 
-If you want to run it, you will have to install the latest version of SFML, place it in the solution folder (next to GlacoxEngineSFML.sln and the gitignore and gitattributes).
+If you want to run it, you will have to install the latest version of SFML, extract it in the solution folder (next to .sln and the gitignore and gitattributes).
 
 Then rename the file "SFML".
 
@@ -13,14 +10,6 @@ You should have this :
 
 
 22/10/2024 the version I use is SFML-2.6.1
-
----
-
-## Making a game
-
-The main.cpp should be empty for you to run your code.
-
-### Just make sur to include librairies.h in every file you create.
 
 ---
 <div id="badges">
