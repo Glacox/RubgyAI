@@ -19,7 +19,7 @@ void Entity::Update()
 
     sf::Vector2f newPosition;
     newPosition.x += dt * mSpeed * mDirection.x;
-    newPosition.x += dt * mSpeed * mDirection.y;
+    newPosition.y += dt * mSpeed * mDirection.y;
     mShape->move(newPosition);
 }
 

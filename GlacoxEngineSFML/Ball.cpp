@@ -19,5 +19,6 @@ Ball::~Ball()
 
 void Ball::Update()
 {
+    // if pl
     Entity::Update();
 }

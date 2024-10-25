@@ -1,10 +1,6 @@
-﻿  Ball.cpp
-  Behaviour.cpp
-  Entity.cpp
+﻿  Behaviour.cpp
   GameManager.cpp
-  main.cpp
-  Player.cpp
   Transition.cpp
-  Utils.cpp
   Génération de code en cours...
+C:\Users\lfiard\source\repos\RubgyAI\GlacoxEngineSFML\Condition.hpp(21): warning C4715: 'AttackCondition::Test' : les chemins de contrôle ne retournent pas tous une valeur
   GlacoxEngineSFML.vcxproj -> C:\Users\lfiard\source\repos\RubgyAI\x64\Debug\GlacoxEngineSFML.exe

@@ -27,6 +27,7 @@ Player::~Player()
 void Player::Update()
 {
 	Entity::Update();
+	mBehaviour->Update(this);
 }
 
 Context::State Player::getState() const
@@ -38,3 +39,4 @@ void Player::setState(Context::State new_state)
 {
     mState = new_state;
 }
+

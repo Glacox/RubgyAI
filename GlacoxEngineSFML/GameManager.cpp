@@ -1,6 +1,8 @@
 #include "GameManager.hpp"
 
 #include "Behaviour.hpp"
+#include "Action.hpp"
+#include "Transition.hpp"
 
 #include "Player.hpp"
 #include "Ball.hpp"
@@ -16,23 +18,30 @@ static GameManager* mInstance = nullptr;
 GameManager::GameManager()
 {
     Behaviour * behaviour = new Behaviour();
+	Transition* transition = new Transition();
 
 	// init behaviour here:
 	// example code:
-	//  Action * action = new ExampleAction();
-	//  behaviour->AddAction(Context::State::ExampleState);
-	//  Transition * example_transition = new Transition();
-	//  example_transition->setTargetState(Context::State::OtherState);
-	//  example_transition->addCondition(new ExampleCondition());
-	//  behaviour->AddTransition(Context::State::ExampleState, example_transition);
+	Action* move = new Move;
+	Action* attacking = new AttackingAction;
+
+	behaviour->AddAction(Context::State::Moving, move);
+	behaviour->AddAction(Context::State::Attacking, attacking);
+
+	
+	transition->setTargetState(Context::State::Attacking);
+	transition->addCondition(new AttackCondition());
+	behaviour->AddTransition(Context::State::Moving, transition);
 
     Player * p1 = new Player(sf::Vector2f(100, 360), behaviour);
     Player * p2 = new Player(sf::Vector2f(1180, 360), behaviour);
     mEntities.push_back(p1);
-    mEntities.push_back(p2);
 
     Ball * ball = new Ball(sf::Vector2f(640, 360));
 	mEntities.push_back(ball);
+
+	p1->setState(Context::State::Moving);
+	behaviour->Start(p1);
 }
 
 GameManager::~GameManager()
@@ -68,6 +77,7 @@ void GameManager::Update()
 	for (Entity* entity : mEntities)
 	{
 		entity->Update();
+		
 	}
 }
 
