@@ -19,6 +19,18 @@
     <Filter Include="Fichiers d%27en-tête\Engine">
       <UniqueIdentifier>{7d84b7b6-36b6-4801-855a-cb184b766d7d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Engine\Graphics">
+      <UniqueIdentifier>{ce230670-079b-4bd0-aae2-425deaf39516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\Graphics">
+      <UniqueIdentifier>{99b81689-659b-4dcc-91c8-32e6198b3efa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\State Machine">
+      <UniqueIdentifier>{74e13be5-d115-4ee0-9c4d-b4db66ed5660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\State Machine">
+      <UniqueIdentifier>{b0d7b790-d5c3-4ae7-87e6-1e4fb5a7c3cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -31,7 +43,28 @@
       <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
     <ClCompile Include="ShapeDrawer.cpp">
+      <Filter>Fichiers sources\Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Transition.cpp">
+      <Filter>Fichiers sources\State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Behaviour.cpp">
+      <Filter>Fichiers sources\State Machine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -45,7 +78,37 @@
       <Filter>Fichiers d%27en-tête\Engine</Filter>
     </ClInclude>
     <ClInclude Include="ShapeDrawer.h">
+      <Filter>Fichiers d%27en-tête\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Behaviour.hpp">
+      <Filter>Fichiers d%27en-tête\State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Condition.hpp">
+      <Filter>Fichiers d%27en-tête\State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Transition.hpp">
+      <Filter>Fichiers d%27en-tête\State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Action.hpp">
+      <Filter>Fichiers d%27en-tête\State Machine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

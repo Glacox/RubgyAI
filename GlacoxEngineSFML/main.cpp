@@ -1,58 +1,47 @@
-#include "libraries.h"
-#include "Graphics.h"
 
-using std::string;
+#include <SFML/Graphics.hpp>
+#include <iostream>
 
-//if you want your window to move size you can delete
-#define WINDOWWIDTH 400
-#define WINDOWHEIGHT 400
+#include "GameManager.hpp"
 
 int main(void)
 {
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "GamingCampus - Rugby - IA/StateMachines");
+    window.setFramerateLimit(60);
 
+    sf::Font font;
+    if (!font.loadFromFile("./Hack-Regular.ttf"))
+    {
+        std::cerr << "Failed to load font" << std::endl;
+        return -1;
+    }
 
-    sf::RenderWindow window(sf::VideoMode(WINDOWWIDTH, WINDOWHEIGHT), "Game");
+	GameManager * game_manager = GameManager::Instantiate();
+    game_manager->setWindow(&window);
 
-    
-
+    sf::Clock clock;
     while (window.isOpen())
     {
+        sf::Time dt = clock.restart();
         sf::Event event;
-
-        // Game Loop
-
-        
-
-        // /Game Loop End/
-
         while (window.pollEvent(event))
         {
-
-            // Event Loop
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed || 
+                (event.type == sf::Event::KeyPressed &&
+                event.key.code == sf::Keyboard::Escape))
             {
                 window.close();
             }
-
-            if (event.type == sf::Event::MouseButtonPressed &&
-                event.mouseButton.button == sf::Mouse::Left)
-            {
-            }
-            if (event.type == sf::Event::KeyPressed &&
-                event.key.code == sf::Keyboard::R)
-            {
-            }
-
-            if (event.type == sf::Event::KeyPressed &&
-                event.key.code == sf::Keyboard::Escape)
-            {
-                window.close();
-            }
-            // /Event Loop End/
         }
 
+        window.clear();
+        window.clear(sf::Color(51, 153, 102));
+
+        game_manager->Update();
+        game_manager->Draw();
 
         window.display();
+
+        game_manager->setDeltaTime(dt.asSeconds());
     }
-    return 0;
 }
