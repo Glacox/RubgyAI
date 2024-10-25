@@ -1,14 +1,10 @@
 ﻿  Ball.cpp
+  Behaviour.cpp
   Entity.cpp
   GameManager.cpp
-  Graphics.cpp
   main.cpp
-  Physics.cpp
   Player.cpp
-  ShapeDrawer.cpp
-  Behaviour.cpp
-c1xx : fatal  error C1083: Impossible d'ouvrir le fichier source : 'StateMachine\Behaviour.cpp' : No such file or directory
   Transition.cpp
-c1xx : fatal  error C1083: Impossible d'ouvrir le fichier source : 'StateMachine\Transition.cpp' : No such file or directory
   Utils.cpp
   Génération de code en cours...
+  GlacoxEngineSFML.vcxproj -> C:\Users\lfiard\source\repos\RubgyAI\x64\Debug\GlacoxEngineSFML.exe

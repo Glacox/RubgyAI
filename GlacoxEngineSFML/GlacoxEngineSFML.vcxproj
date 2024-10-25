@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Behaviour.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -138,12 +139,14 @@
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ShapeDrawer.cpp" />
-    <ClCompile Include="StateMachine\Behaviour.cpp" />
-    <ClCompile Include="StateMachine\Transition.cpp" />
+    <ClCompile Include="Transition.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.hpp" />
     <ClInclude Include="Ball.hpp" />
+    <ClInclude Include="Behaviour.hpp" />
+    <ClInclude Include="Condition.hpp" />
     <ClInclude Include="Context.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="GameManager.hpp" />
@@ -152,10 +155,7 @@
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="ShapeDrawer.h" />
-    <ClInclude Include="StateMachine\Action.hpp" />
-    <ClInclude Include="StateMachine\Behaviour.hpp" />
-    <ClInclude Include="StateMachine\Condition.hpp" />
-    <ClInclude Include="StateMachine\Transition.hpp" />
+    <ClInclude Include="Transition.hpp" />
     <ClInclude Include="Utils.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
