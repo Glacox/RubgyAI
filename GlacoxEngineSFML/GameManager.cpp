@@ -94,10 +94,7 @@ GameManager::GameManager() {
     //behaviour->Start(b1);
     //behaviour->Start(b2);
 
-    if (a1->getPosition().x > 300)
-    {
-        a1->setState(Context::State::Passing)
-    }
+    
 }
 
 GameManager::~GameManager() {
@@ -134,6 +131,7 @@ void GameManager::Update()
 		entity->Update();
 		
 	}
+
 
     if (mBall->getPosition().x > mField->getRightTryLine() || mBall->getPosition().x < mField->getLeftTryLine()) 
     {

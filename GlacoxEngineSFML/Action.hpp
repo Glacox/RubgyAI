@@ -59,8 +59,8 @@ public:
 
     virtual void Update(Player* player) override 
     {
-        //std::cout << "\rAttacking";
-
+        std::cout << "\rAttacking";
+        player->setColor(sf::Color::Magenta);
         Field* mField = new Field();
         if (player->getTeam() == Team::TeamA)
         {
@@ -72,6 +72,12 @@ public:
             player->goToPosition(sf::Vector2f(mField->getLeftTryLine(), player->getPosition().y));
         }
 
+        if (player->getPosition().x > 300)
+        {
+            player->setState(Context::State::Passing);
+        }
+
+        
     }
 
     virtual void End(Player* player) override {}
@@ -87,12 +93,13 @@ public:
 
     virtual void Update(Player* player) override 
     {
-        //std::cout << "\rPassing";
-
+        std::cout << "\rPassing";
+        player->setColor(sf::Color::Blue);
         Ball* ball = GameManager::Get()->getBall();
         int selectedPlayer;
         int playerArraySize = GameManager::Get()->getPlayers().size();
 
+        player->releaseBall();
         selectedPlayer = rand() % playerArraySize + 0;
 
         if ((player->getTeam() == GameManager::Get()->getPlayers()[selectedPlayer]->getTeam()) ||
@@ -105,7 +112,6 @@ public:
         {
 
         }
-        
 
     }
     virtual void End(Player* player) override 
@@ -123,7 +129,7 @@ public:
 
     virtual void Update(Player* player) override 
     {
-        std::cout << "\rFollowing";
+        //std::cout << "\rFollowing";
         player->setColor(sf::Color::White);
         Field* mField = new Field();
 
