@@ -99,12 +99,12 @@ public:
         int selectedPlayer;
         int playerArraySize = GameManager::Get()->getPlayers().size();
 
-        
+        srand(time(NULL));
+
         selectedPlayer = rand() % playerArraySize + 0;
         if (ball != nullptr)
         {
-            if ((player->getTeam() == GameManager::Get()->getPlayers()[selectedPlayer]->getTeam()) ||
-                (player->getTeam() == GameManager::Get()->getPlayers()[selectedPlayer]->getTeam())  )
+            if ((player->getTeam() == GameManager::Get()->getPlayers()[selectedPlayer]->getTeam()))
             {
                 ball->goToPosition(sf::Vector2f( GameManager::Get()->getPlayers()[selectedPlayer]->getPosition().x+120 , GameManager::Get()->getPlayers()[selectedPlayer]->getPosition().y ) );
                 player->releaseBall();
@@ -133,6 +133,7 @@ public:
     {
         //std::cout << "\rFollowing";
         player->setColor(sf::Color::White);
+        Ball* ball = GameManager::Get()->getBall();
         Field* mField = new Field();
 
         if (player->getTeam() == Team::TeamA)
@@ -143,6 +144,13 @@ public:
         if (player->getTeam() == Team::TeamB)
         {
             player->goToPosition(sf::Vector2f(mField->getLeftTryLine(), player->getPosition().y));
+        }
+
+        float ballDistance = Utils::GetDistance(player->getPosition(), ball->getPosition());
+        const float catchDistance = 50.0f;
+
+        if (ballDistance < catchDistance) {
+            player->catchBall(ball);
         }
     }
 
