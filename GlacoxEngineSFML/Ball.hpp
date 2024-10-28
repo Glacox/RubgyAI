@@ -1,15 +1,21 @@
 #pragma once
 
-#include "Entity.hpp"
 #include <SFML/Graphics/CircleShape.hpp>
 
-class Player;
+#include "Entity.hpp"
 
-class Ball : public Entity
-{
+class Player; 
+
+class Ball : public Entity {
 public:
     Ball(const sf::Vector2f& position);
     ~Ball();
 
     void Update() override;
+    void setHolder(Player* player) { mHolder = player; }
+    Player* getHolder() const { return mHolder; }
+    bool isFree() const { return mHolder == nullptr; }
+
+private:
+    Player* mHolder = nullptr;
 };

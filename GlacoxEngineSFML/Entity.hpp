@@ -29,4 +29,7 @@ public:
     const sf::Vector2f& getPosition() const;
 
     const sf::Shape& getShape();
+
+    float getSpeed() const { return mSpeed; }
+    void setSpeed(float speed) { mSpeed = speed; }
 };

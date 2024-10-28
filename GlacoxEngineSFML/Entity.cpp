@@ -13,14 +13,11 @@ Entity::~Entity()
 { 
 }
 
-void Entity::Update()
-{
+void Entity::Update() {
     float dt = GameManager::Get()->getDeltaTime();
-
-    sf::Vector2f newPosition;
-    newPosition.x += dt * mSpeed * mDirection.x;
-    newPosition.y += dt * mSpeed * mDirection.y;
-    mShape->move(newPosition);
+    sf::Vector2f newPosition = mShape->getPosition();
+    newPosition += dt * mSpeed * mDirection;
+    mShape->setPosition(newPosition);
 }
 
 void Entity::setPosition(const sf::Vector2f& position)
