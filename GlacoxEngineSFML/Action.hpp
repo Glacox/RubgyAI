@@ -95,19 +95,21 @@ public:
     {
         std::cout << "\rPassing";
         player->setColor(sf::Color::Blue);
-        Ball* ball = GameManager::Get()->getBall();
+        Ball* ball = player->getHeldBall();
         int selectedPlayer;
         int playerArraySize = GameManager::Get()->getPlayers().size();
 
-        player->releaseBall();
+        
         selectedPlayer = rand() % playerArraySize + 0;
-
-        if ((player->getTeam() == GameManager::Get()->getPlayers()[selectedPlayer]->getTeam()) ||
-            (player->getTeam() == GameManager::Get()->getPlayers()[selectedPlayer]->getTeam())  )
+        if (ball != nullptr)
         {
-            ball->goToPosition(GameManager::Get()->getPlayers()[selectedPlayer]->getPosition());
+            if ((player->getTeam() == GameManager::Get()->getPlayers()[selectedPlayer]->getTeam()) ||
+                (player->getTeam() == GameManager::Get()->getPlayers()[selectedPlayer]->getTeam())  )
+            {
+                ball->goToPosition(sf::Vector2f( GameManager::Get()->getPlayers()[selectedPlayer]->getPosition().x+120 , GameManager::Get()->getPlayers()[selectedPlayer]->getPosition().y ) );
+                player->releaseBall();
+            }
         }
-
         else 
         {
 

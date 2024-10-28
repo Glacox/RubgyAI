@@ -57,18 +57,20 @@ GameManager::GameManager() {
     // Création des joueurs
     float startXA = mField->getLeftTryLine() + 50.f;
     Player* a1 = new Player(sf::Vector2f(startXA, 360.f), behaviour, Team::TeamA);
-    Player* a2 = new Player(sf::Vector2f(startXA-50 , 300.f), behaviour, Team::TeamA);
-    Player* a3 = new Player(sf::Vector2f(startXA - 50, 420.f), behaviour, Team::TeamA);
+    Player* a2 = new Player(sf::Vector2f(startXA - 50 , 100.f), behaviour, Team::TeamA);
+    Player* a3 = new Player(sf::Vector2f(startXA - 50, 620.f), behaviour, Team::TeamA);
 
     float startXB = mField->getRightTryLine() - 10.f;
-    //Player* b1 = new Player(sf::Vector2f(startXB, 360.f), behaviour, Team::TeamB);
-    //Player* b2 = new Player(sf::Vector2f(startXB+50, 420.f), behaviour, Team::TeamB);
+    Player* b1 = new Player(sf::Vector2f(startXB, 360.f), behaviour, Team::TeamB);
+    Player* b2 = new Player(sf::Vector2f(startXB+50, 420.f), behaviour, Team::TeamB);
+    Player* b3 = new Player(sf::Vector2f(startXB + 50, 420.f), behaviour, Team::TeamB);
 
     mPlayers.push_back(a1);
     mPlayers.push_back(a2);
     mPlayers.push_back(a3);
-    //mPlayers.push_back(b1);
-    //mPlayers.push_back(b2);
+    mPlayers.push_back(b1);
+    mPlayers.push_back(b2);
+    mPlayers.push_back(b3);
 
     for (auto* p : mPlayers) {
         mEntities.push_back(p);
@@ -77,22 +79,24 @@ GameManager::GameManager() {
     mBallInitialPosition = sf::Vector2f(mField->getWidth() / 2, mField->getHeight() / 2);
     mBall = new Ball(mBallInitialPosition);
     mEntities.push_back(mBall);
-    //mPlayers[rand() % mPlayers.size() + 0]->catchBall(mBall);
-    a1->catchBall(mBall);
+    mPlayers[rand() % mPlayers.size() + 0]->catchBall(mBall);
+    //a1->catchBall(mBall);
 
     // Initialisation des états
     a1->setState(Context::State::Idle);
     a2->setState(Context::State::Idle);
     a3->setState(Context::State::Idle);
-    //b1->setState(Context::State::Idle);
-    //b2->setState(Context::State::Idle);
+    b1->setState(Context::State::Idle);
+    b2->setState(Context::State::Idle);
+    b3->setState(Context::State::Idle);
 
     // Démarrage des comportements
     behaviour->Start(a1);
     behaviour->Start(a2);
     behaviour->Start(a3);
-    //behaviour->Start(b1);
-    //behaviour->Start(b2);
+    behaviour->Start(b1);
+    behaviour->Start(b2);
+    behaviour->Start(b3);
 
     
 }

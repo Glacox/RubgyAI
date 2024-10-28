@@ -10,7 +10,7 @@ Ball::Ball(const sf::Vector2f& position) {
     shape->setPosition(position);
     mShape = shape;
     mHolder = nullptr;
-    mSpeed = 40.f;  // Vitesse de la balle
+    mSpeed = 300.f;  // Vitesse de la balle
 }
 
 Ball::~Ball() {
