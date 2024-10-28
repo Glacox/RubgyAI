@@ -1,6 +1,5 @@
 #include "Ball.hpp"
 #include "Player.hpp"
-#include <SFML/Graphics/CircleShape.hpp>
 
 Ball::Ball(const sf::Vector2f& position) {
     sf::CircleShape* shape = new sf::CircleShape();

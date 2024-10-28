@@ -10,14 +10,23 @@ Player::Player(const sf::Vector2f& position, Behaviour* behaviour, Team team) :
     mInitialPosition(position)
 {
     mSize = 50.f;
-    mSpeed = 300.f;
+    mSpeed = 200.f;
+    mInitialSpeed = mSpeed;
+    
 
     sf::CircleShape* shape = new sf::CircleShape(10);
     shape->setRadius(mSize / 2.f);
-    shape->setFillColor(team == Team::TeamA ? sf::Color::Green : sf::Color::Red);
+    if (mTeam == Team::TeamA)
+        mColor = sf::Color::Green;
+    else
+        mColor = sf::Color::Red;
+
+    shape->setFillColor(mColor);
     shape->setOrigin(mSize / 2.f, mSize / 2.f);
     shape->setPosition(position);
+
     mShape = shape;
+    mInitialColor = mColor;
 }
 
 Player::~Player() {
@@ -44,7 +53,7 @@ void Player::releaseBall() {
 
 void Player::resetToInitialPosition() {
     setPosition(mInitialPosition);
-    setState(Context::State::Moving);
+    setState(Context::State::Idle);
     if (hasBall()) {
         releaseBall();
     }
@@ -56,4 +65,10 @@ Context::State Player::getState() const {
 
 void Player::setState(Context::State new_state) {
     mState = new_state;
+}
+
+void Player::setColor(sf::Color color) {
+
+    mColor = color;
+    mShape->setFillColor(mColor);
 }

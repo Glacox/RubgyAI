@@ -16,6 +16,9 @@ class Player : public Entity {
     Ball* mHeldBall;
     Team mTeam;
     sf::Vector2f mInitialPosition;
+    float mInitialSpeed;
+    sf::Color mColor;
+    sf::Color mInitialColor;
 
 public:
     Player(const sf::Vector2f& position, Behaviour* behaviour, Team team);
@@ -30,7 +33,10 @@ public:
     bool hasBall() const { return mHeldBall != nullptr; }
     Ball* getHeldBall() const { return mHeldBall; }
     Team getTeam() const { return mTeam; }
+    float getInitialSpeed() const { return mInitialSpeed; }
 
     void resetToInitialPosition();
     const sf::Vector2f& getInitialPosition() const { return mInitialPosition; }
+    void setColor(sf::Color color);
+    sf::Color getInitialColor() const { return mInitialColor;  }
 };

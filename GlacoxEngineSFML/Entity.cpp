@@ -3,8 +3,6 @@
 #include "GameManager.hpp"
 #include "Utils.hpp"
 
-#include <SFML/Graphics/Shape.hpp>
-
 Entity::Entity()
 { 
 }

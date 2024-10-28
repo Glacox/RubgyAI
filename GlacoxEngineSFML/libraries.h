@@ -1,6 +1,10 @@
 #pragma once
 #include <chrono>
 #include <iostream>
+#include <vector>
+#include <limits>
 #include <thread>
 #include <functional>
 #include <SFML/Graphics.hpp>
+#include <cmath>
+#include <stdlib.h>

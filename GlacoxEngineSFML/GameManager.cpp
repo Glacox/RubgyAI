@@ -4,7 +4,6 @@
 #include "Transition.hpp"
 #include "Player.hpp"
 #include "Ball.hpp"
-#include <SFML/Graphics/RenderWindow.hpp>
 
 namespace {
     static GameManager* mInstance = nullptr;
@@ -16,66 +15,60 @@ GameManager::GameManager() {
     Behaviour* behaviour = new Behaviour();
 
     // Actions
-    Action* move = new Move();
+    Action* idle = new IdleAction();
     Action* attacking = new AttackingAction();
-    Action* catchBall = new CatchBallAction();
-    Action* hasBall = new HasBallAction();
-    Action* pass = new PassAction();
-    Action* intercept = new InterceptAction();
-    Action* follow = new FollowAction();
+    Action* following = new FollowingAction();
+    Action* defending = new DefendingAction();
+    Action* passing = new PassingAction();
 
     // Configuration des actions pour chaque état
-    behaviour->AddAction(Context::State::Moving, move);
+    behaviour->AddAction(Context::State::Idle, idle);
     behaviour->AddAction(Context::State::Attacking, attacking);
-    behaviour->AddAction(Context::State::ChasingBall, catchBall);
-    behaviour->AddAction(Context::State::HasBall, hasBall);
-    behaviour->AddAction(Context::State::PassingBall, pass);
-    behaviour->AddAction(Context::State::Intercepting, intercept);
-    behaviour->AddAction(Context::State::Following, follow);
+    behaviour->AddAction(Context::State::Following, following);
+    behaviour->AddAction(Context::State::Defending, defending);
+    behaviour->AddAction(Context::State::Passing, passing);
 
-    // Transitions
-    Transition* transitionToAttack = new Transition();
-    transitionToAttack->setTargetState(Context::State::Attacking);
-    transitionToAttack->addCondition(new AttackCondition());
-    behaviour->AddTransition(Context::State::Moving, transitionToAttack);
+    // Transitions IDLE
+    Transition* t_IdleToAttacking = new Transition();
+    t_IdleToAttacking->setTargetState(Context::State::Attacking);
+    t_IdleToAttacking->addCondition(new AttackingCondition());
+    behaviour->AddTransition(Context::State::Idle, t_IdleToAttacking);
 
-    Transition* transitionToChaseBall = new Transition();
-    transitionToChaseBall->setTargetState(Context::State::ChasingBall);
-    transitionToChaseBall->addCondition(new BallFreeCondition());
-    behaviour->AddTransition(Context::State::Moving, transitionToChaseBall);
+    Transition* t_IdleToFollowing = new Transition();
+    t_IdleToFollowing->setTargetState(Context::State::Following);
+    t_IdleToFollowing->addCondition(new FollowingCondition());
+    behaviour->AddTransition(Context::State::Idle, t_IdleToFollowing);
 
-    // Pour récupérer une balle libre même depuis HasBall
-    Transition* transitionToChaseBallFromHasBall = new Transition();
-    transitionToChaseBallFromHasBall->setTargetState(Context::State::ChasingBall);
-    transitionToChaseBallFromHasBall->addCondition(new BallFreeCondition());
-    behaviour->AddTransition(Context::State::HasBall, transitionToChaseBallFromHasBall);
+    Transition* t_IdleToDefending = new Transition();
+    t_IdleToDefending->setTargetState(Context::State::Defending);
+    t_IdleToDefending->addCondition(new DefendingCondition());
+    behaviour->AddTransition(Context::State::Idle, t_IdleToDefending);
 
-    Transition* transitionToPass = new Transition();
-    transitionToPass->setTargetState(Context::State::PassingBall);
-    transitionToPass->addCondition(new OpponentNearbyCondition());
-    behaviour->AddTransition(Context::State::HasBall, transitionToPass);
+    Transition* t_AttackingToPassing = new Transition();
+    t_AttackingToPassing->setTargetState(Context::State::Passing);
+    t_AttackingToPassing->addCondition(new PassingCondition());
+    behaviour->AddTransition(Context::State::Attacking, t_AttackingToPassing);
 
-    Transition* transitionToIntercept = new Transition();
-    transitionToIntercept->setTargetState(Context::State::Intercepting);
-    transitionToIntercept->addCondition(new ShouldInterceptCondition());
-    behaviour->AddTransition(Context::State::Moving, transitionToIntercept);
-
-    Transition* transitionToFollow = new Transition();
-    transitionToFollow->setTargetState(Context::State::Following);
-    transitionToFollow->addCondition(new ShouldFollowCondition());
-    behaviour->AddTransition(Context::State::Moving, transitionToFollow);
+    Transition* t_DefendingToAttacking = new Transition();
+    t_DefendingToAttacking->setTargetState(Context::State::Attacking);
+    t_DefendingToAttacking->addCondition(new AttackingCondition());
+    behaviour->AddTransition(Context::State::Defending, t_DefendingToAttacking);
 
     // Création des joueurs
     float startXA = mField->getLeftTryLine() + 50.f;
-    Player* p1 = new Player(sf::Vector2f(startXA, 360.f), behaviour, Team::TeamA);
-    Player* p2 = new Player(sf::Vector2f(startXA - 100.f, 260.f), behaviour, Team::TeamA);
+    Player* a1 = new Player(sf::Vector2f(startXA, 360.f), behaviour, Team::TeamA);
+    Player* a2 = new Player(sf::Vector2f(startXA-50 , 300.f), behaviour, Team::TeamA);
+    Player* a3 = new Player(sf::Vector2f(startXA - 50, 420.f), behaviour, Team::TeamA);
 
-    float startXB = mField->getRightTryLine() - 50.f;
-    Player* opponent = new Player(sf::Vector2f(startXB, 360.f), behaviour, Team::TeamB);
+    float startXB = mField->getRightTryLine() - 10.f;
+    //Player* b1 = new Player(sf::Vector2f(startXB, 360.f), behaviour, Team::TeamB);
+    //Player* b2 = new Player(sf::Vector2f(startXB+50, 420.f), behaviour, Team::TeamB);
 
-    mPlayers.push_back(p1);
-    mPlayers.push_back(p2);
-    mPlayers.push_back(opponent);
+    mPlayers.push_back(a1);
+    mPlayers.push_back(a2);
+    mPlayers.push_back(a3);
+    //mPlayers.push_back(b1);
+    //mPlayers.push_back(b2);
 
     for (auto* p : mPlayers) {
         mEntities.push_back(p);
@@ -84,16 +77,27 @@ GameManager::GameManager() {
     mBallInitialPosition = sf::Vector2f(mField->getWidth() / 2, mField->getHeight() / 2);
     mBall = new Ball(mBallInitialPosition);
     mEntities.push_back(mBall);
+    //mPlayers[rand() % mPlayers.size() + 0]->catchBall(mBall);
+    a1->catchBall(mBall);
 
     // Initialisation des états
-    p1->setState(Context::State::Moving);
-    p2->setState(Context::State::Moving);
-    opponent->setState(Context::State::Moving);
+    a1->setState(Context::State::Idle);
+    a2->setState(Context::State::Idle);
+    a3->setState(Context::State::Idle);
+    //b1->setState(Context::State::Idle);
+    //b2->setState(Context::State::Idle);
 
     // Démarrage des comportements
-    behaviour->Start(p1);
-    behaviour->Start(p2);
-    behaviour->Start(opponent);
+    behaviour->Start(a1);
+    behaviour->Start(a2);
+    behaviour->Start(a3);
+    //behaviour->Start(b1);
+    //behaviour->Start(b2);
+
+    if (a1->getPosition().x > 300)
+    {
+        a1->setState(Context::State::Passing)
+    }
 }
 
 GameManager::~GameManager() {
@@ -130,6 +134,11 @@ void GameManager::Update()
 		entity->Update();
 		
 	}
+
+    if (mBall->getPosition().x > mField->getRightTryLine() || mBall->getPosition().x < mField->getLeftTryLine()) 
+    {
+        resetPositions();
+    }
 }
 
 void GameManager::Draw()
@@ -161,6 +170,7 @@ void GameManager::resetPositions() {
     // Reset tous les joueurs
     for (auto* player : mPlayers) {
         player->resetToInitialPosition();
+        player->setColor(player->getInitialColor());
     }
 
     // Reset la balle
@@ -169,4 +179,7 @@ void GameManager::resetPositions() {
     if (mBall->getHolder()) {
         mBall->getHolder()->releaseBall();
     }
+
+    mPlayers[rand() % mPlayers.size() + 0]->catchBall(mBall);
+
 }

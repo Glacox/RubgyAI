@@ -1,9 +1,8 @@
-﻿  Ball.cpp
-  Behaviour.cpp
-  Entity.cpp
+﻿  Behaviour.cpp
+C:\Users\lfiard\source\repos\RubgyAI\GlacoxEngineSFML\Action.hpp(94,29): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
   GameManager.cpp
-  Player.cpp
-  Transition.cpp
-  main.cpp
+C:\Users\lfiard\source\repos\RubgyAI\GlacoxEngineSFML\Action.hpp(94,29): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
   Génération de code en cours...
-  GlacoxEngineSFML.vcxproj -> D:\dl2\dev\repos\RubgyAI\x64\Debug\GlacoxEngineSFML.exe
+C:\Users\lfiard\source\repos\RubgyAI\GlacoxEngineSFML\Condition.hpp(17): warning C4715: 'AttackingCondition::Test' : les chemins de contrôle ne retournent pas tous une valeur
+C:\Users\lfiard\source\repos\RubgyAI\GlacoxEngineSFML\Condition.hpp(39): warning C4715: 'DefendingCondition::Test' : les chemins de contrôle ne retournent pas tous une valeur
+  GlacoxEngineSFML.vcxproj -> C:\Users\lfiard\source\repos\RubgyAI\x64\Debug\GlacoxEngineSFML.exe
